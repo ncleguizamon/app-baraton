@@ -1,0 +1,12 @@
+<mat-card >
+
+<div class="alinear" *ngFor="let categoria of categorias" >
+<button mat-button [matMenuTriggerFor]="menu">{{categoria.name}}</button>
+<mat-menu #menu="matMenu">
+  <button  *ngFor="let sub of categoria.sublevels" mat-menu-item>{{sub.name}}</button>
+ 
+</mat-menu>
+</div>
+
+
+</mat-card>
