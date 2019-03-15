@@ -1,12 +1,25 @@
 # AppBaraton
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.
+Se encuentra desarrollado con angular cli 7 , bootstrap y angular material2.
 
-## Development server
+Para ejecutar en localhost
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Clonar repositorio 
 
-## Code scaffolding
+        git clone https://github.com/ncleguizamon/app-baraton.git
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Ejecutar 
 
+        cd app-baraton 
+
+- Restaurar paquetes 
+
+        npm  install
+
+- Iniciar el servidor de desarrollo
+
+        ng serve
+        
+- Abrir la siguiente url
+        
+        http://localhost:4200

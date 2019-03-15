@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import   categories from '../../assets/data/categories.json';
+import {CarComponent} from '../car/car.component';
+
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-nav',
@@ -8,13 +11,30 @@ import   categories from '../../assets/data/categories.json';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+
+  @ViewChild(ModalDirective) staticModal: ModalDirective;
+
+  
+  @ViewChild(CarComponent) Car: CarComponent;
+
+
   categorias:any
   constructor() { }
 
   ngOnInit() {
-console.log(categories);
+
 this.categorias =categories.categories
 
+
+
   }
+
+  getCart(){
+    this.Car.ngOnInit()
+    this.staticModal.show()
+
+  }
+
+
 
 }

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { NgxIndexedDB } from 'ngx-indexed-db';
-
 
 @Injectable({
   providedIn: 'root'
@@ -9,32 +7,82 @@ import { NgxIndexedDB } from 'ngx-indexed-db';
 
 
 export class CarService {
-
-db: any = new NgxIndexedDB('Cart', 1);
+  car: [];
 
   constructor() {
-   
+
 
   }
 
 
+getCar(){
+  return JSON.parse(localStorage.getItem('car'));
+}
 
+  add(product: any) {
 
-  get() {
-    const rta=false;
-    const db = new NgxIndexedDB('Cart', 1);
-  db.openDatabase(1, evt => {
-      let objectStore = evt.currentTarget.result.createObjectStore('people', { keyPath: 'id', autoIncrement: true });
+    let existing: any = localStorage.getItem('car');
+    console.log(existing);
+    if (existing == null) { // creamos el carro si no existe
+      let init = [];
+      product.cantidad = 1;
+      let newcar = init.concat(product)
+      localStorage.setItem('car', JSON.stringify(newcar));
+    } else {
+      // validamos que en el carro no exista el producto
+      const id = this.validar(JSON.parse(localStorage.getItem('car')));
 
-      objectStore.createIndex('name', 'name', { unique: false });
-      objectStore.createIndex('email', 'email', { unique: true });
-    }).then(function() {
-      db.getByKey('people', 1).then((person) => {
-      this.rta = person;
-      }, (error) => {
-      console.log(error);
-      });
-      });
-      return rta;
+      if (!id.includes(product.id)) {
+        const car = JSON.parse(localStorage.getItem('car'));
+        product.cantidad = 1;
+        let carJson = car.concat(product)
+        localStorage.setItem('car', JSON.stringify(carJson));
+      } else {
+
+      }
     }
+
+
+
+
+  }
+
+
+  delete(product: any) {
+    const car = JSON.parse(localStorage.getItem('car'));
+    for (let i = 0; i < car.length; i++) {
+      if (car[i].id == product.id) {
+        car.splice(i);
+      }
+    }
+    localStorage.setItem('car', JSON.stringify(car));
+  }
+
+
+  updateCantidad(product: any, cantidad: number) {
+    const car = JSON.parse(localStorage.getItem('car'));
+    for (let i = 0; i < car.length; i++) {
+      if (car[i].id == product.id) {
+        car[i].cantidad = cantidad;
+      }
+    }
+    localStorage.setItem('car', JSON.stringify(car));
+  }
+
+
+  clear(){
+    localStorage.removeItem('car');
+
+  }
+
+
+  private validar(array: any) {
+    let id = [];
+    for (let i = 0; i < array.length; i++) {
+      id.push(array[i].id)
+    }
+    return id;
+  }
+
+
 }

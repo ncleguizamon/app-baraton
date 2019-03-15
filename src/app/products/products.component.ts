@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import   Products from '../../assets/data/products.json';
 import { Options } from 'ng5-slider';
 import {CarService} from '../_servicios/car.service';
-
+import {CarComponent} from '../car/car.component';
 
 @Component({
   selector: 'app-products',
@@ -10,14 +10,19 @@ import {CarService} from '../_servicios/car.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+
+
   
-  userFilter: any = { name: '' };
+  @ViewChild(CarComponent) Car: CarComponent;
+
+
+
   value: number = 0;
 
-  highValue: number = 100;
+  highValue: number = 20000;
   options: Options = {
     floor: 0,
-    ceil: 100,
+    ceil: 20000,
     translate: (value: number): string => {
       this.ngOnInit();
       return '$' + value;
@@ -32,16 +37,19 @@ export class ProductsComponent implements OnInit {
   constructor( private carService: CarService) { }
 
   ngOnInit() {
-console.log(this.carService.get())
-
 this.setProducts();
   
   }
   
 
 
+
+
+
+  addCar(product:{}){
+this.Car.addCar(product);
+  }
 setProducts(){
-  console.log(Products);
 
   
   
@@ -72,7 +80,7 @@ updateorden(){
 
 updateNumber(numero:any){
   let p1= numero.replace("$","")
-  return p1.replace(",",".")
+  return p1.replace(",","")
 }
 
 

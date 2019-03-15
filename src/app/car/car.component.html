@@ -1,0 +1,36 @@
+<div *ngIf="car.length > 0 " class="row">
+  <div *ngFor="let product of car " class="col-sm-4">
+    <div class="card">
+
+      <div class="card-body">
+        <button (click)="deleteProduct(product)" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="card-title">{{product.name}}</h5>
+        <b>{{product.price}}</b>
+        <p class="card-text">{{product.quantity }} </p>
+        <form class="login-form">
+          <div class="form-group">
+            <label class="control-label">cantidad</label>
+            <input type="number" value="{{product.cantidad}}" (change)="updateCantidad($event.target.value,product )"
+              placeholder="Cantidad" class="form-control" name="cantidad">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div  class="col-sm-12">
+  
+  
+    <a class="btn btn-primary" (click)="Pagar()"  >Pagar</a>
+
+  </div>
+
+
+</div>
+<div *ngIf="car.length == 0 " class="row">
+    <div  class="col-sm-12">
+ <p>No tenemos productos en el carrito..</p>
+</div>
+</div>

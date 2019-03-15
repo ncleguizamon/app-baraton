@@ -20,14 +20,21 @@
  <div   class="col-sm-4">
   
 </div>
+<div   class="col-sm-12">
+  <app-car></app-car>
+</div>
+
 
   <div *ngFor="let product of products "  class="col-sm-4">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">{{product.name}}</h5>
         <b>{{product.price}}</b>
-        <p class="card-text">{{product.quantity }} {{product.available}}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <p class="card-text">{{product.quantity }} </p>
+
+
+        <a *ngIf="product.available" (click)="addCar(product)" class="btn btn-primary">Añadir al carro</a>
+        <small *ngIf="!product.available" >Producto no disponible</small>
       </div>
     </div>
   </div>
